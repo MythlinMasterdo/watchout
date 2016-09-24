@@ -30,7 +30,7 @@ Feel free to use it if you like. */
 .asteroid {
   width: 100px;
   height: 100px;
-  transition: all 1s ease;
+  transition: all 1.5s ease-out;
 }
 #mainTitle {
   text-align: center;
@@ -50,4 +50,9 @@ Feel free to use it if you like. */
   float: left;
   height: 20px;
   width: 20px;
+}
+.overlay {
+  height: 100vh;
+  background: white;
+  display: none;
 }

@@ -7,7 +7,7 @@ var score = '0';
 var high = '0';
 
 
-for (var i = 0; i < 25; i++) {
+for (var i = 0; i < 35; i++) {
   boardAsteroids.push(asteroids[Math.floor(Math.random() * asteroids.length)]);
 }
 
@@ -18,11 +18,9 @@ function collision () {
                     .selectAll('.highscore').selectAll('span')
                     .text(function () {
                       if (Number(score) > Number(high)) {
-                        console.log("score", score, "highScore", high)
                         high = score;
                         return score;
                       } else {
-                        console.log("not high", high, score)
                         return high;
                       }
                     });
@@ -31,14 +29,42 @@ function collision () {
                        .selectAll('.current').selectAll('span')
                        .text('0');
 
-  setTimeout(function () { score = 0}, 100);
+  setTimeout(function () { score = 0 }, 100);
 
   var collisions = scoreboard
                     .selectAll('.collisions').selectAll('.collisions-wrapper')
                     .append("svg:image")
                     .attr("xlink:href", 'collision-ship.svg')
-                    .attr('class', 'collision-ship')
+                    .attr('class', 'collision-ship');
+  console.log("in collision")
+
+  var flashing = d3.select('body').selectAll('.overlay')
+                   .style('display', 'block')
+
+  var explosion = new Audio('explosion.mp3');
+  explosion.play();
+
+  function notFlashing () {  
+    var not = d3.select('body').selectAll('.overlay')
+                     .style('display', 'none')
+  }
+
+  setTimeout(notFlashing, 100);
+   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 var box = d3.select('.board')
               .append('svg')
               .attr('width', boxWidth)
@@ -50,7 +76,7 @@ var asteroid = box.selectAll('div')
              .enter()
              .append("svg:image")
              .attr('x', function () { return Math.random() * 1500 })
-             .attr('y', function () { return Math.random() * 1500 })
+             .attr('y', function () { return Math.random() * 1000 })
              .attr('r', function () { return Math.random() * 100  })
              .attr('class', 'asteroid')
              .attr("xlink:href", function (d) { return d })
@@ -59,8 +85,13 @@ var asteroid = box.selectAll('div')
 
 function moveAsteroids () {
   var asteroids = box.selectAll('.asteroid')
-                     .attr('x', function () { return Math.random() * 1500; })
-                     .attr('y', function () { return Math.random() * 1500; })
+                     .attr('x', function () { 
+                      var n = Math.floor(Math.random() * 3000); 
+                      var pn = n % 2 === 0 ? "-" + n : n;
+                      console.log(pn)
+                      return pn;
+                    })
+                     .attr('y', function () { return Math.random() * 1100; })
 }
 
 setInterval(moveAsteroids, 1000);
