@@ -4,12 +4,17 @@
     <link rel='stylesheet' type='text/css' href='styles.css'>
   </head>
   <body>
+  <audio controls>
+    <source src="background_music.mp3" type="audio/mpeg">
+  </audio>
+    <div id="mainTitle">Asteroids</div>
     <div class="scoreboard">
       <!-- Modify the scoreboard when important events occur in your game! -->
-      <div id="mainTitle">Asteroids</div>
-      <div class="highscore">High score: <span></span></div>
-      <div class="current">Current score: <span></span></div>
-      <div class="collisions">Collisions: <span></span></div>
+      <div class="score-wrapper">
+        <div class="highscore">High score: <span></span></div>
+        <div class="current">Current score: <span></span></div>
+        <div class="collisions">Collisions: <div class="collisions-wrapper"></div></div>
+      </div>
     </div>
     <div class="board"><div class="mouse"></div></div>
     <script src="lib/d3.js" charset="utf-8"></script>

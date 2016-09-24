@@ -13,14 +13,18 @@ Feel free to use it if you like. */
   width: 100vw;
   cursor: url('ship.svg'), auto;
   background-color: black;
-
+}
+.score-wrapper {
+  padding-top: -20px;
 }
 .scoreboard {
   font-family: hyperspace;
+  font-size: 20px;
   border-bottom: 3px solid white;
   padding: 10px;
   background-color: black;
   color: white;
+  margin-right: -30px;
 }
 
 .asteroid {
@@ -32,4 +36,18 @@ Feel free to use it if you like. */
   text-align: center;
   font-family: hyperspace;
   font-size: 50px;
+  background-color: black;
+  color: white;
+  margin-right: -20px;
+}
+.collisions-wrapper {
+  height: 30px;
+  width: 100vw;
+  border: 1px solid red;
+}
+.collision-ship {
+  background-color: red;
+  float: left;
+  height: 20px;
+  width: 20px;
 }

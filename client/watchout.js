@@ -12,32 +12,38 @@ for (var i = 0; i < 25; i++) {
 }
 
 function collision () {
+  var scoreboard = d3.select('.scoreboard');
 
-  var highScore = d3.select('.scoreboard')
+  var highScore = scoreboard
                     .selectAll('.highscore').selectAll('span')
                     .text(function () {
-                      if (score > high) {
+                      if (Number(score) > Number(high)) {
+                        console.log("score", score, "highScore", high)
+                        high = score;
                         return score;
                       } else {
+                        console.log("not high", high, score)
                         return high;
                       }
                     });
 
-  var currentScore = d3.select('.scoreboard')
+  var currentScore = scoreboard
                        .selectAll('.current').selectAll('span')
                        .text('0');
 
-  score = 0;
+  setTimeout(function () { score = 0}, 100);
+
+  var collisions = scoreboard
+                    .selectAll('.collisions').selectAll('.collisions-wrapper')
+                    .append("svg:image")
+                    .attr("xlink:href", 'collision-ship.svg')
+                    .attr('class', 'collision-ship')
 }
-
-
-
-
-
 var box = d3.select('.board')
               .append('svg')
               .attr('width', boxWidth)
-              .attr('height', boxHeight);
+              .attr('height', boxHeight)
+              .on('mouseout', collision)
 
 var asteroid = box.selectAll('div')
              .data(boardAsteroids)
@@ -48,7 +54,7 @@ var asteroid = box.selectAll('div')
              .attr('r', function () { return Math.random() * 100  })
              .attr('class', 'asteroid')
              .attr("xlink:href", function (d) { return d })
-             .on('mouseover', collision)
+             .on('mouseover', collision);
 
 
 function moveAsteroids () {
@@ -63,7 +69,7 @@ function incrementScore () {
   score = "" + (Number(score) + 1);
   var currentScore = d3.select('.scoreboard')
                        .selectAll('.current').selectAll('span')
-                       .text(score)
+                       .text(score);
 }
 
 setInterval(incrementScore, 200);
